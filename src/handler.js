@@ -14,7 +14,7 @@ const addBooksHandler = (request, h) => {
         reading,
     } = request.payload;
 
-    if( name === undefined){
+    if( !name){
         const response = h.response ({
             status :'fail',
             message : 'input Book Name',
@@ -30,6 +30,8 @@ const addBooksHandler = (request, h) => {
 
 
         });
+        response.code(400)
+    return response
     }
 
 
