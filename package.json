@@ -164,6 +164,7 @@
     "yocto-queue": "^0.1.0"
   },
   "scripts": {
+    "start-prod": "NODE_ENV=production node ./src/server.js",
     "start": "node ./src/server.js",
     "lint": "eslint ./src"
   },
