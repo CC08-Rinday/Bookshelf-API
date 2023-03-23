@@ -114,7 +114,7 @@ const getAllBooksHandler = (request, h) => {
         books: books.map((book) => ({
           id: book.id,
           name: book.name,
-          publisher: book.publisher,
+          publisher: book.publisher
         }))
       }
     });
