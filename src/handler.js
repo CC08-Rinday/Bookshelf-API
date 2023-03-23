@@ -14,30 +14,32 @@ const addBooksHandler = (request, h) => {
         reading,
     } = request.payload;
 
-    if( !name){
-        const response = h.response ({
-            status :'fail',
-            message : 'input Book Name',
-        });
-        response.code(400);
-        return response;
+    const id = nanoid(16)
+    const finished = pageCount === readPage
+    const insertedAt = new Date().toISOString()
+    const updatedAt = insertedAt
+  
+  
+    if (!name) {
+      const response = h.response({
+        status: 'fail',
+        message: 'Gagal menambahkan buku. Mohon isi nama buku'
+      })
+      response.code(400)
+      return response
     }
-
-    if(pageCount < readPage){
-        const response = h.response ({
-            status:'fail',
-            message:'"Check the Pagecount again, it should not be less than ReadPage'
-
-
-        });
-        response.code(400)
-    return response
+  
+    
+  
+    if (readPage > pageCount) {
+      const response = h.response({
+        status: 'fail',
+        message: 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount'
+      })
+      response.code(400)
+      return response
     }
-
-
-    const id = nanoid(16);
-    const createdAt = new Date().toISOString();
-    const updatedAt = createdAt;
+  
 
     const newBook ={
         name,
@@ -57,7 +59,7 @@ const addBooksHandler = (request, h) => {
 
     if (isSuccess) {
 
-        const response =h.response({
+        const response = h.response({
             status: 'Succes',
             message: 'Succefuly',
             data:{
