@@ -116,14 +116,8 @@ const getAllBooksHandler = (request, h) => {
             name: book.name,
             publisher: book.publisher
         }))
-      },
-      data: {
-        books: filteredBooks.map((book) => ({
-       id: book.id,
-       name: book.name,
-       publisher: book.publisher
-         }))
-        }
+      }
+      
     });
   
     response.code(200);
@@ -134,26 +128,23 @@ const getAllBooksHandler = (request, h) => {
 
 const getBooksByIdHandler = (request, h) => {
 
-    const   { 
-            Id
-             } = request.params;
-    const book = books.filter((b) => b.id === Id)[0];
+    const { id } = request.params;
+ 
+    const book = books.filter((b) => b.id === id)[0];
   
-   
     if (book !== undefined) {
+        const response = h.response({
+          status: 'success',
+          data: {
+            book,
+          },
+        });
+        response.code(200);
+        return response;
+      }
       const response = h.response({
-        status: 'success',
-        data: {
-          book,
-        },
-      });
-      response.code(200);
-      return response;
-    }
-  
-    const response = h.response({
       status: 'fail',
-      message: 'Buku tidak ditemukan'
+      message: 'Buku tidak ditemukan',
     });
     response.code(404);
     return response;
