@@ -111,12 +111,19 @@ const getAllBooksHandler = (request, h) => {
     const response = h.response({
       status: 'success',
       data: {
-        books: filteredBooks.map((book) => ({
+             books: filteredBooks.map((book) => ({
             id: book.id,
             name: book.name,
             publisher: book.publisher
         }))
-      }
+      },
+      data: {
+        books: filteredBooks.map((book) => ({
+       id: book.id,
+       name: book.name,
+       publisher: book.publisher
+         }))
+        }
     });
   
     response.code(200);
@@ -154,7 +161,7 @@ const getBooksByIdHandler = (request, h) => {
 
 const editBooksByIdHandler = (request, h) => {
     const { bookId } = request.params;
-    
+
     const {
       name,
       year,
