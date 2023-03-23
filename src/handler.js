@@ -78,7 +78,7 @@ const addBooksHandler = (request, h) => {
 
  
 };
-// ---KRITERIA 4--- //
+
 const getAllBooksHandler = (request, h) => {
     const response = h.response({
       status: 'success',
@@ -96,12 +96,12 @@ const getAllBooksHandler = (request, h) => {
 }
   
 
-// ---KRITERIA 5--- //
+
 const getBooksByIdHandler = (request, h) => {
     const { bookId } = request.params
     const book = books.filter((b) => b.id === bookId)[0]
   
-    // Bila buku dengan id yang dilampirkan ditemukan
+   
     if (book) {
       const response = h.response({
         status: 'success',
@@ -113,7 +113,6 @@ const getBooksByIdHandler = (request, h) => {
       return response
     }
   
-    // Bila buku dengan id yang dilampirkan oleh client tidak ditemukan
     const response = h.response({
       status: 'fail',
       message: 'Buku tidak ditemukan'
@@ -122,7 +121,6 @@ const getBooksByIdHandler = (request, h) => {
     return response
   }
 
-  // ---KRITERIA 6--- //
 const editBooksByIdHandler = (request, h) => {
     const { bookId } = request.params
     const {
@@ -140,7 +138,6 @@ const editBooksByIdHandler = (request, h) => {
   
     const index = books.findIndex((book) => book.id === bookId)
   
-    // Client tidak melampirkan properti namepada request body.
   
     if (!name) {
       const response = h.response({
@@ -151,7 +148,7 @@ const editBooksByIdHandler = (request, h) => {
       return response
     }
   
-    // Client melampirkan nilai properti readPage yang lebih besar dari nilai properti pageCount.
+  
   
     if (readPage > pageCount) {
       const response = h.response({
@@ -162,7 +159,7 @@ const editBooksByIdHandler = (request, h) => {
       return response
     }
   
-    // Buku berhasil diperbarui
+
   
     if (index !== -1) {
       const finished = pageCount === readPage
@@ -191,7 +188,7 @@ const editBooksByIdHandler = (request, h) => {
       return response
     }
   
-    // Buku gagal diperbarui
+
   
     const response = h.response({
       status: 'fail',
@@ -202,8 +199,7 @@ const editBooksByIdHandler = (request, h) => {
   }
 
 
-  
-// ---KRITERIA 7--- //
+
 const deleteBooksByIdHandler = (request, h) => {
     const { bookId } = request.params
   
